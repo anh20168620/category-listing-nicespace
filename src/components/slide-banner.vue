@@ -4,21 +4,30 @@
       <swiper-slide>
         <img
           class="swiper-image"
-          src="../../assets/image/banner1.png"
+          src="../assets/image/banner1.png"
           alt="banner nicespace1"
         />
       </swiper-slide>
+
       <swiper-slide>
         <img
           class="swiper-image"
-          src="../../assets/image/banner1.png"
+          src="../assets/image/banner1.png"
           alt="banner nicespace1"
         />
       </swiper-slide>
     </swiper>
     <div class="sub-banner">
-      <img class="sub-banner" src="../../assets/image/sub-banner1.png" alt="" />
-      <img class="sub-banner" src="../../assets/image/sub-banner2.png" alt="" />
+      <img
+        class="sub-banner"
+        src="../assets/image/sub-banner1.png"
+        alt="sub banner 1"
+      />
+      <img
+        class="sub-banner"
+        src="../assets/image/sub-banner2.png"
+        alt="sub banner 2"
+      />
     </div>
   </div>
 </template>

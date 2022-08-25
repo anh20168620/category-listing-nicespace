@@ -1,10 +1,11 @@
 <template>
-  <img :src="base_url_image + url_image" alt="" class="base-img" />
+  <img :src="baseUrlImage + urlImage" alt="" class="base-img" />
 </template>
+
 <script>
 export default {
   props: {
-    url_image: {
+    urlImage: {
       type: String,
       required: true,
       default: "",
@@ -12,11 +13,12 @@ export default {
   },
   data() {
     return {
-      base_url_image: "https://media-api-beta.thinkpro.vn/",
+      baseUrlImage: "https://media-api-beta.thinkpro.vn/",
     };
   },
 };
 </script>
+
 <style>
 .base-img {
   width: 100%;

@@ -1,17 +1,16 @@
 <template>
   <div :class="{ 'section-filter': true }" ref="sectionFilter">
     <div class="filter-list">
-      <div class="filter-item">
-        <div class="filter-item-text font-semibold">Sắp xếp: Nổi bật nhất</div>
-        <div class="filter-item-icon">
-          <img src="../../assets/image/down-arrow.png" alt="" />
+      <div
+        class="filter-item"
+        v-for="filterOption in filterOptions"
+        :key="filterOption.id"
+      >
+        <div class="filter-item-text font-semibold">
+          {{ filterOption.nameFilterOption }}
         </div>
-      </div>
-
-      <div class="filter-item">
-        <div class="filter-item-text font-semibold">3 bộ lọc áp dụng</div>
         <div class="filter-item-icon">
-          <img src="../../assets/image/down-arrow.png" alt="" />
+          <img src="../assets/image/down-arrow.png" alt="" />
         </div>
       </div>
 
@@ -24,31 +23,16 @@
         </div>
       </div>
 
-      <div class="filter-item border-radius">
-        <div class="filter-item-text font-seminormal">Khoảng giá</div>
-        <div class="filter-item-icon">
-          <img src="../../assets/image/down-arrow.png" alt="" />
+      <div
+        v-for="filter in filterList"
+        :key="filter.id"
+        class="filter-item border-radius"
+      >
+        <div class="filter-item-text font-seminormal">
+          {{ filter.nameFilter }}
         </div>
-      </div>
-
-      <div class="filter-item border-radius">
-        <div class="filter-item-text font-seminormal">SiliconZ, CyberChair</div>
         <div class="filter-item-icon">
-          <img src="../../assets/image/down-arrow.png" alt="" />
-        </div>
-      </div>
-
-      <div class="filter-item border-radius">
-        <div class="filter-item-text font-seminormal">Chất liệu lưng ghế</div>
-        <div class="filter-item-icon">
-          <img src="../../assets/image/down-arrow.png" alt="" />
-        </div>
-      </div>
-
-      <div class="filter-item border-radius">
-        <div class="filter-item-text font-seminormal">Thương hiệu</div>
-        <div class="filter-item-icon">
-          <img src="../../assets/image/down-arrow.png" alt="" />
+          <img src="../assets/image/down-arrow.png" alt="" />
         </div>
       </div>
     </div>
@@ -58,17 +42,38 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      filterOptions: [
+        { id: 1, nameFilterOption: "Sắp xếp: Nổi bật nhất" },
+        { id: 2, nameFilterOption: "3 bộ lọc áp dụng" },
+      ],
+
+      filterList: [
+        { id: 1, nameFilter: "Khoảng giá" },
+        { id: 2, nameFilter: "SiliconZ, CyberChair" },
+        { id: 3, nameFilter: "Chất liệu lưng ghế" },
+        { id: 4, nameFilter: "Thương hiệu" },
+      ],
+    };
   },
-  mounted() {
-    document.addEventListener("scroll", () => {
+
+  methods: {
+    addClassSticky() {
       let el = this.$refs.sectionFilter;
       if (el.getBoundingClientRect().top === 0) {
         el.classList.add("sticky");
       } else {
         el.classList.remove("sticky");
       }
-    });
+    },
+  },
+
+  mounted() {
+    document.addEventListener("scroll", () => this.addClassSticky());
+  },
+
+  unmounted() {
+    document.removeEventListener("scroll", () => this.addClassSticky());
   },
 };
 </script>
@@ -79,11 +84,6 @@ export default {
   left: 0px;
   right: 0px;
   top: 0px;
-  padding: 24px 0 16px 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
   z-index: 2;
 }
 
@@ -92,8 +92,14 @@ export default {
 }
 
 .filter-list {
-  margin: 0 160px;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
+  padding: 24px 0 16px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
 }
 
 .filter-item {

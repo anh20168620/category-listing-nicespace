@@ -1,20 +1,15 @@
 <template>
-  <div
-    class="category-listing"
-    @click="isShowModal ? (isShowModal = false) : ''"
-  >
-    <the-header @tonggleModal="isShowModal = !isShowModal"></the-header>
+  <div class="category-listing" @click="$emit('closeModal')">
     <div class="detail-category">
-      <!-- <div class="container"> -->
-      <the-banner></the-banner>
+      <slide-banner></slide-banner>
 
-      <the-filter></the-filter>
+      <filter-bar></filter-bar>
 
-      <the-filter-mobile
-        @openModalFilterMobile="openModalFilterInMobile()"
-      ></the-filter-mobile>
+      <filter-bar-mobile
+        @toggleModalFilterMobile="toggleModalFilterMobile()"
+      ></filter-bar-mobile>
 
-      <the-brand></the-brand>
+      <brand-logo></brand-logo>
 
       <div class="product-list container">
         <product-card
@@ -27,9 +22,7 @@
 
       <button class="btn" @click="fetchMoreProduct">Xem thêm</button>
     </div>
-    <!-- </div> -->
-    <the-footer></the-footer>
-    <the-slogan></the-slogan>
+
     <modal-category
       v-show="isShowModal"
       @update-category="updateCategory"
@@ -41,78 +34,73 @@
     ></modal-filter-mobile>
   </div>
 </template>
+
 <script>
-import TheHeader from "../components/layouts/the-header.vue";
-import TheBanner from "../components/layouts/the-banner.vue";
-import TheFilter from "../components/layouts/the-filter.vue";
-import TheFilterMobile from "../components/layouts/the-filter-mobile.vue";
-import ModalFilterMobile from "../components/articles/modal-filter-mobile.vue";
-import TheBrand from "../components/layouts/the-brand.vue";
-import ProductCard from "../components/articles/product-card.vue";
-import TheFooter from "../components/layouts/the-footer.vue";
-import ModalCategory from "../components/articles/modal-category.vue";
-import TheSlogan from "../components/layouts/the-slogan.vue";
+import SlideBanner from "../components/slide-banner.vue";
+import FilterBar from "../components/filter-bar.vue";
+import FilterBarMobile from "../components/filter-bar-mobile.vue";
+import ModalFilterMobile from "../components/modal-filter-mobile.vue";
+import BrandLogo from "../components/brand-logo.vue";
+import ProductCard from "../components/product-card.vue";
+import ModalCategory from "../components/modal-category.vue";
 
 import { fetchProduct } from "../services";
+
 export default {
   components: {
-    TheHeader,
-    TheBanner,
-    TheFilter,
-    TheFilterMobile,
+    SlideBanner,
+    FilterBar,
+    FilterBarMobile,
     ModalFilterMobile,
-    TheBrand,
+    BrandLogo,
     ProductCard,
-    TheFooter,
-    TheSlogan,
     ModalCategory,
+  },
+
+  props: {
+    isShowModal: {
+      type: Boolean,
+    },
   },
   data() {
     return {
       productList: [],
-      cur_page: 1,
+      curPage: 1,
       category: 7,
-      isShowModal: false,
       isShowModalFilterMobile: false,
     };
   },
+
   async created() {
-    try {
-      const result = await fetchProduct({
-        keyword: "",
-        cur_page: this.cur_page,
-        per_page: 24,
-        sort: 1,
-        category: this.category,
-      });
-      this.productList = result.data;
-      console.log(this.productList);
-    } catch (error) {
-      console.log(error.message);
-    }
+    this.productList = await this.fetchProductList();
   },
+
   methods: {
-    async fetchMoreProduct() {
+    async fetchProductList() {
       try {
-        this.cur_page += 1;
         const result = await fetchProduct({
           keyword: "",
-          cur_page: this.cur_page,
+          cur_page: this.curPage,
           per_page: 24,
           sort: 1,
           category: this.category,
         });
-        this.productList = this.productList.concat(result.data);
+        return result.data;
       } catch (error) {
         console.log(error);
       }
+    },
+
+    async fetchMoreProduct() {
+      this.cur_page += 1;
+      this.productList = this.productList.concat(await this.fetchProductList());
     },
 
     updateCategory(newCategory) {
       this.category = newCategory;
     },
 
-    openModalFilterInMobile() {
+    toggleModalFilterMobile() {
       this.isShowModalFilterMobile = !this.isShowModalFilterMobile;
     },
 
@@ -120,25 +108,16 @@ export default {
       this.isShowModalFilterMobile = false;
     },
   },
+
   watch: {
     async category() {
-      try {
-        const result = await fetchProduct({
-          keyword: "",
-          cur_page: this.cur_page,
-          per_page: 24,
-          sort: 1,
-          category: this.category,
-        });
-        this.productList = result.data;
-        window.scrollTo(0, 500);
-      } catch (error) {
-        console.log(error);
-      }
+      this.productList = await this.fetchProductList();
+      window.scrollTo(0, 500);
     },
   },
 };
 </script>
+
 <style>
 .detail-category {
   padding-top: 24px;

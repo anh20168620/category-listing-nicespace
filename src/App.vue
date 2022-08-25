@@ -1,15 +1,43 @@
 <template>
-  <!-- <category-listing></category-listing> -->
-  <router-view></router-view>
+  <the-header
+    @closeModal="closeModal()"
+    @toggleModal="toggleModal()"
+  ></the-header>
+
+  <router-view
+    :isShowModal="isShowModal"
+    @closeModal="closeModal()"
+  ></router-view>
+
+  <the-footer></the-footer>
+
+  <the-slogan></the-slogan>
 </template>
+
 <script>
-import CategoryListing from "./pages/category-listing.vue";
+import TheHeader from "./components/layouts/the-header.vue";
+import TheFooter from "./components/layouts/the-footer.vue";
+import TheSlogan from "./components/layouts/the-slogan.vue";
+
 export default {
-  components: {
-    CategoryListing,
+  components: { TheHeader, TheFooter, TheSlogan },
+  data() {
+    return {
+      isShowModal: false,
+    };
+  },
+  methods: {
+    toggleModal() {
+      this.isShowModal = !this.isShowModal;
+    },
+
+    closeModal() {
+      this.isShowModal = false;
+    },
   },
 };
 </script>
+
 <style>
 html {
   scroll-behavior: smooth;

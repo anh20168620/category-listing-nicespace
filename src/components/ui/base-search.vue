@@ -1,17 +1,18 @@
 <template>
   <div class="base-search">
-    <img src="../../assets/image/search.png" alt="search nicespace" />
+    <img src="../../assets/image/search.png" alt="base search nicespace" />
     <input
       class="search-input"
       type="search"
-      for="search"
       placeholder="Tên sản phẩm, hãng..."
     />
   </div>
 </template>
+
 <script>
 export default {};
 </script>
+
 <style>
 .base-search {
   display: flex;

@@ -7,9 +7,11 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {};
 </script>
+
 <style>
 .the-slogan {
   background-color: #b0f1ad;

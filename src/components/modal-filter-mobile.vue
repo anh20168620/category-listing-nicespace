@@ -5,7 +5,7 @@
       <div class="modal-mobile-header">
         <div class="modal-close" @click="$emit('closeModalFilterMobile')">
           <img
-            src="../../assets/image/close.png"
+            src="../assets/image/close.png"
             class="modal-close-image"
             alt=""
           />
@@ -19,27 +19,16 @@
             Chỉ hiển thị sp có Ưu đãi / Khuyến mại
           </div>
           <div class="modal-mobile-checkbox">
-            <input type="checkbox" name="" id="" />
+            <input type="checkbox" />
           </div>
         </div>
 
-        <div class="modal-mobile-item">
-          <div class="modal-mobile-text">Khoảng giá</div>
-          <div class="modal-mobile-sub-text">Tất cả</div>
-        </div>
-
-        <div class="modal-mobile-item">
-          <div class="modal-mobile-text">Hãng</div>
-          <div class="modal-mobile-sub-text">Tất cả</div>
-        </div>
-
-        <div class="modal-mobile-item">
-          <div class="modal-mobile-text">Chất liệu lưng ghế</div>
-          <div class="modal-mobile-sub-text">Tất cả</div>
-        </div>
-
-        <div class="modal-mobile-item">
-          <div class="modal-mobile-text">Chất liệu mâm ghế</div>
+        <div
+          class="modal-mobile-item"
+          v-for="filterOption in filterOptionList"
+          :key="filterOption.id"
+        >
+          <div class="modal-mobile-text">{{ filterOption.name }}</div>
           <div class="modal-mobile-sub-text">Tất cả</div>
         </div>
       </div>
@@ -49,9 +38,22 @@
     </div>
   </div>
 </template>
+
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      filterOptionList: [
+        { id: 1, name: "Khoảng giá" },
+        { id: 2, name: "Hãng" },
+        { id: 3, name: "Chất liệu lưng ghế" },
+        { id: 4, name: "Chất liệu mâm ghế" },
+      ],
+    };
+  },
+};
 </script>
+
 <style>
 .modal-mobile {
   position: fixed;

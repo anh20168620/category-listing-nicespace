@@ -1,7 +1,7 @@
 <template>
   <div class="product-item">
     <div class="product-item-img">
-      <base-image :url_image="product.image"></base-image>
+      <base-image :urlImage="product.image"></base-image>
     </div>
     <div class="product-item-content">
       <div class="product-item-name">{{ product.name }}</div>
@@ -20,21 +20,21 @@
       </div>
     </div>
     <div class="product-item-gift">
-      <div class="gifft-image">
-        <img src="../../assets/image/gift.png" alt="" />
+      <div class="gift-image">
+        <img src="../assets/image/gift.png" alt="gift" />
       </div>
       <span class="gift-text">Quà tặng</span>
     </div>
   </div>
 </template>
+
 <script>
-import BaseImage from "../ui/base-image.vue";
+import BaseImage from "./ui/base-image.vue";
 export default {
   props: {
     product: {
       type: Object,
       required: true,
-      default: {},
     },
   },
   components: {
@@ -52,6 +52,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .product-item {
   display: flex;
@@ -126,7 +127,7 @@ export default {
   gap: 8px;
 }
 
-.gifft-image {
+.gift-image {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,7 +137,7 @@ export default {
   border-radius: 50%;
 }
 
-.gifft-image image {
+.gift-image image {
   width: 12px;
   height: 12px;
 }

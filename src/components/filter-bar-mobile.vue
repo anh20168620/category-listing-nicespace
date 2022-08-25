@@ -2,12 +2,12 @@
   <div class="the-filter-mobile flex container">
     <div class="the-filter-mobile-item flex">
       <img
-        src="../../assets/image/faders.png"
+        src="../assets/image/faders.png"
         class="the-filter-mobile-img"
         alt=""
       />
       <div
-        @click="$emit('openModalFilterMobile')"
+        @click="$emit('toggleModalFilterMobile')"
         class="the-filter-mobile-text"
       >
         Bộ lọc
@@ -16,7 +16,7 @@
 
     <div class="the-filter-mobile-item flex">
       <img
-        src="../../assets/image/ArrowsDownUp.png"
+        src="../assets/image/ArrowsDownUp.png"
         class="the-filter-mobile-img"
         alt=""
       />
@@ -24,9 +24,11 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {};
 </script>
+
 <style>
 .the-filter-mobile {
   flex-direction: row;

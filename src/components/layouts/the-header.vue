@@ -1,12 +1,12 @@
 <template>
-  <div class="the-header">
+  <div class="the-header" @click="$emit('closeModal')">
     <div class="container flex align-items h-full">
       <router-link :to="{ name: 'category-page' }">
         <div class="logo">
           <img src="../../assets/image/Logo.png" alt="Logo nicespace" />
         </div>
       </router-link>
-      <div class="category layout-padding" @click.stop="$emit('tonggleModal')">
+      <div class="category layout-padding" @click.stop="$emit('toggleModal')">
         <img src="../../assets/image/dropdown.png" alt="dropdown" />
         <span class="font-semibold text-paragraph">Danh mục</span>
       </div>
@@ -23,6 +23,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import BaseSearch from "../ui/base-search.vue";
 export default {
@@ -31,6 +32,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .the-header {
   height: 80px;
@@ -48,7 +50,7 @@ export default {
 
 .layout-padding {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 11px 16px 12px;
   gap: 10px;
   margin-right: 8px;

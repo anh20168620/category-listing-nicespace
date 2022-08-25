@@ -6,19 +6,18 @@
         :class="selectedIndex === category.id ? 'active' : null"
         v-for="category in categoryList"
         :key="category.id"
-        @click="
-          handleSelectd(category.id), $emit('updateCategory', category.category)
-        "
+        @click="handleClickModal(category.id, category.category)"
       >
         {{ category.text }}
       </div>
     </div>
     <div class="modal-category-phone">
-      <img src="../../assets/image/phone.png" alt="contact nicespace" />
+      <img src="../assets/image/phone.png" alt="contact nicespace" />
       <span class="font-semibold text-paragraph">1900.63.3579</span>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -55,12 +54,18 @@ export default {
   },
 
   methods: {
-    handleSelectd(id) {
+    handleSelected(id) {
       this.selectedIndex = id;
+    },
+
+    handleClickModal(id, category) {
+      this.handleSelected(id);
+      this.$emit("updateCategory", category);
     },
   },
 };
 </script>
+
 <style>
 .modal-category {
   flex-direction: column;

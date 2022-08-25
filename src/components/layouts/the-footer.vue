@@ -10,85 +10,33 @@
           <div class="footer-sub-title">Nhận tư vấn miễn phí từ chuyên gia</div>
           <div class="footer-contact-list">
             <a
-              href="tel:1900633579"
-              class="footer-contact-item background-head-set"
+              v-for="contact in contactList"
+              :key="contact.id"
+              :href="contact.href"
+              :class="['footer-contact-item', contact.backgroundClass]"
               target="_blank"
             >
-              <img src="../../assets/image/head-set.png" alt="" />
-            </a>
-
-            <a
-              href="https://zalo.me/3877075650294314763"
-              class="footer-contact-item background-zalo"
-              target="_blank"
-              ><img src="../../assets/image/zalo.png" alt="" />
-            </a>
-
-            <a href="" class="footer-contact-item background-message">
-              <img
-                class="footer-contact-item-img"
-                src="../../assets/image/boder-message.png"
-                alt=""
-              />
-              <img
-                class="footer-contact-item-img"
-                src="../../assets/image/message.png"
-                alt=""
-              />
-            </a>
-
-            <a
-              href="https://t.me/thinkprocommunity"
-              class="footer-contact-item background-telegram"
-              target="_blank"
-            >
-              <img src="../../assets/image/telegram.png" alt="" />
+              <img :src="getImageUrl(contact.image)" :alt="contact.alt" />
             </a>
           </div>
         </div>
         <div class="footer-address">
           <div class="footer-title">Hệ thống cửa hàng</div>
           <div class="footer-address-list flex">
-            <div class="footer-address-item flex">
-              <div class="address-city SG">SG</div>
+            <div
+              class="footer-address-item flex"
+              v-for="address in addressList"
+              :key="address.id"
+            >
+              <div :class="['address-city', address.classCity]">
+                {{ address.city }}
+              </div>
               <div class="address-detail flex">
                 <div class="address-detail-text">
-                  Số 5 - 7 Nguyễn Huy Tưởng, Phường 6, Quận Bình Thạnh
+                  {{ address.detailAddress }}
                 </div>
                 <div class="address-detail-map">
-                  <a
-                    href="https://goo.gl/maps/Qu6ySmsGRvUp7ZfY8"
-                    target="_blank"
-                    >Chỉ đường</a
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="footer-address-item flex">
-              <div class="address-city SG">SG</div>
-              <div class="address-detail flex">
-                <div class="address-detail-text">
-                  95 Trần Thiện Chánh, Phuờng 12, Quận 10
-                </div>
-                <div class="address-detail-map">
-                  <a
-                    href="https://goo.gl/maps/V9gy89C1JDsALhH96"
-                    target="_blank"
-                    >Chỉ đường</a
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="footer-address-item flex">
-              <div class="address-city HN">HN</div>
-              <div class="address-detail flex">
-                <div class="address-detail-text">53 Thái Hà, Đống Đa</div>
-                <div class="address-detail-map">
-                  <a href="https://g.page/r/CUspK01W2maXEBA" target="_blank"
-                    >Chỉ đường</a
-                  >
+                  <a :href="address.href" target="_blank">Chỉ đường</a>
                 </div>
               </div>
             </div>
@@ -97,56 +45,17 @@
         <div class="footer-payment">
           <div class="footer-title">Đa dạng thanh toán</div>
           <div class="list-payment flex">
-            <div class="item-payment flex">
+            <div
+              v-for="payment in paymentList"
+              :key="payment.id"
+              class="item-payment flex"
+            >
               <img
                 class="item-payment-text"
-                src="../../assets/image/double-arow.png"
-                alt=""
+                :src="getImageUrl(payment.image)"
+                :alt="payment.alt"
               />
-              <div class="item-payment-text">Chuyển khoản</div>
-            </div>
-
-            <div class="item-payment flex">
-              <img
-                class="item-payment-text"
-                src="../../assets/image/money.png"
-                alt=""
-              />
-              <div class="item-payment-text">Tiền mặt</div>
-            </div>
-
-            <div class="item-payment flex">
-              <img
-                class="item-payment-text"
-                src="../../assets/image/vnpay.png"
-                alt=""
-              />
-            </div>
-
-            <div class="item-payment flex">
-              <img
-                class="item-payment-text"
-                src="../../assets/image/viet-qr.png"
-                alt=""
-              />
-            </div>
-
-            <div class="item-payment flex">
-              <img
-                class="item-payment-text"
-                src="../../assets/image/atm.png"
-                alt=""
-              />
-              <div class="item-payment-text">Thẻ ATM</div>
-            </div>
-
-            <div class="item-payment flex">
-              <img
-                class="item-payment-text"
-                src="../../assets/image/global-card.png"
-                alt=""
-              />
-              <div class="item-payment-text">Thẻ Quốc tế</div>
+              <div class="item-payment-text">{{ payment.text }}</div>
             </div>
           </div>
         </div>
@@ -154,55 +63,18 @@
           <div class="footer-title">Nicespace trên social networks</div>
           <div class="list-social flex">
             <a
-              href="https://www.facebook.com/thinkpro.vn"
+              v-for="social in socialList"
+              :key="social.id"
+              :href="social.href"
               target="_blank"
               class="item-social flex"
             >
               <img
                 class="item-social-text"
-                src="../../assets/image/facebook.png"
-                alt=""
+                :src="getImageUrl(social.image)"
+                :alt="social.alt"
               />
-              <div class="item-social-text">Facebook</div>
-            </a>
-
-            <a
-              href="https://www.youtube.com/c/ThinkProVN"
-              target="_blank"
-              class="item-social flex"
-            >
-              <img
-                class="item-social-text"
-                src="../../assets/image/youtube.png"
-                alt=""
-              />
-              <div class="item-social-text">Youtube</div>
-            </a>
-
-            <a
-              href="https://www.tiktok.com/@thinkpro.vn"
-              target="_blank"
-              class="item-social flex"
-            >
-              <img
-                class="item-social-text"
-                src="../../assets/image/tiktok.png"
-                alt=""
-              />
-              <div class="item-social-text">TikTok</div>
-            </a>
-
-            <a
-              href="https://t.me/thinkprocommunity"
-              target="_blank"
-              class="item-social flex"
-            >
-              <img
-                class="item-social-text"
-                src="../../assets/image/telegram-pink.png"
-                alt=""
-              />
-              <div class="item-social-text">Telegram</div>
+              <div class="item-social-text">{{ social.text }}</div>
             </a>
           </div>
         </div>
@@ -214,9 +86,144 @@
     </div>
   </div>
 </template>
+
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      contactList: [
+        {
+          id: 1,
+          href: "tel:1900633579",
+          image: "head-set.png",
+          backgroundClass: "background-head-set",
+          alt: "head-set",
+        },
+        {
+          id: 2,
+          href: "https://zalo.me/3877075650294314763",
+          image: "zalo.png",
+          backgroundClass: "background-zalo",
+          alt: "zalo contact",
+        },
+        {
+          id: 3,
+          href: "",
+          image: "message.png",
+          backgroundClass: "background-message",
+          alt: "message contact",
+        },
+        {
+          id: 4,
+          href: "https://t.me/thinkprocommunity",
+          image: "telegram.png",
+          backgroundClass: "background-telegram",
+          alt: "telegram contact",
+        },
+      ],
+      addressList: [
+        {
+          id: 1,
+          city: "SG",
+          classCity: "SG",
+          detailAddress: "Số 5 - 7 Nguyễn Huy Tưởng, Phường 6, Quận Bình Thạnh",
+          href: "https://goo.gl/maps/Qu6ySmsGRvUp7ZfY8",
+        },
+        {
+          id: 2,
+          city: "SG",
+          classCity: "SG",
+          detailAddress: "95 Trần Thiện Chánh, Phuờng 12, Quận 10",
+          href: "https://goo.gl/maps/V9gy89C1JDsALhH96",
+        },
+        {
+          id: 3,
+          city: "HN",
+          classCity: "HN",
+          detailAddress: "53 Thái Hà, Đống Đa",
+          href: "https://g.page/r/CUspK01W2maXEBA",
+        },
+      ],
+      paymentList: [
+        {
+          id: 1,
+          text: "Chuyển khoản",
+          alt: "transfer",
+          image: "double-arow.png",
+        },
+        {
+          id: 2,
+          text: "Tiền mặt",
+          alt: "cash",
+          image: "money.png",
+        },
+        {
+          id: 3,
+          text: "",
+          alt: "vnpay",
+          image: "vnpay.png",
+        },
+        {
+          id: 4,
+          text: "",
+          alt: "viet-qr",
+          image: "viet-qr.png",
+        },
+        {
+          id: 5,
+          text: "Thẻ ATM",
+          alt: "atm",
+          image: "atm.png",
+        },
+        {
+          id: 6,
+          text: "Thẻ Quốc tế",
+          alt: "global-card",
+          image: "global-card.png",
+        },
+      ],
+      socialList: [
+        {
+          id: 1,
+          text: "Facebook",
+          href: "https://www.facebook.com/thinkpro.vn",
+          image: "facebook.png",
+          alt: "facebook thinkpro",
+        },
+        {
+          id: 2,
+          text: "Youtube",
+          href: "https://www.youtube.com/c/ThinkProVN",
+          image: "youtube.png",
+          alt: "youtube thinkpro",
+        },
+        {
+          id: 3,
+          text: "TikTok",
+          href: "https://www.tiktok.com/@thinkpro.vn",
+          image: "tiktok.png",
+          alt: "tiktok thinkpro",
+        },
+        {
+          id: 4,
+          text: "Telegram",
+          href: "https://t.me/thinkprocommunity",
+          image: "telegram-pink.png",
+          alt: "telegram thinkpro",
+        },
+      ],
+    };
+  },
+
+  setup() {
+    const getImageUrl = (name) => {
+      return new URL(`../../assets/image/${name}`, import.meta.url).href;
+    };
+    return { getImageUrl };
+  },
+};
 </script>
+
 <style>
 .the-footer {
   padding: 32px 0;
@@ -356,7 +363,6 @@ export default {};
 
 .item-payment,
 .item-social {
-  display: block;
   width: 164px;
   height: 52px;
   border: 1px solid #e6e8ea;
