@@ -1,0 +1,76 @@
+<template>
+  <!-- <category-listing></category-listing> -->
+  <router-view></router-view>
+</template>
+<script>
+import CategoryListing from "./pages/category-listing.vue";
+export default {
+  components: {
+    CategoryListing,
+  },
+};
+</script>
+<style>
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-items {
+  align-items: center;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.text-paragraph {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.font-seminormal {
+  font-weight: 400;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+::placeholder {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 600;
+  color: #6b7075;
+}
+
+@media (max-width: 740px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 16px;
+    padding-left: 16px;
+    position: relative;
+  }
+}
+</style>
