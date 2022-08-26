@@ -23,11 +23,6 @@
       <button class="btn" @click="fetchMoreProduct">Xem thêm</button>
     </div>
 
-    <modal-category
-      v-show="isShowModal"
-      @update-category="updateCategory"
-    ></modal-category>
-
     <modal-filter-mobile
       @closeModalFilterMobile="closeModalFilterInMobile()"
       v-show="isShowModalFilterMobile"
@@ -42,7 +37,6 @@ import FilterBarMobile from "../components/filter-bar-mobile.vue";
 import ModalFilterMobile from "../components/modal-filter-mobile.vue";
 import BrandLogo from "../components/brand-logo.vue";
 import ProductCard from "../components/product-card.vue";
-import ModalCategory from "../components/modal-category.vue";
 
 import { fetchProduct } from "../services";
 
@@ -54,21 +48,22 @@ export default {
     ModalFilterMobile,
     BrandLogo,
     ProductCard,
-    ModalCategory,
   },
 
-  props: {
-    isShowModal: {
-      type: Boolean,
-    },
-  },
   data() {
     return {
       productList: [],
       curPage: 1,
-      category: 7,
       isShowModalFilterMobile: false,
     };
+  },
+
+  props: {
+    category: {
+      type: Number,
+      require: true,
+      default: 7,
+    },
   },
 
   async created() {
@@ -94,10 +89,6 @@ export default {
     async fetchMoreProduct() {
       this.cur_page += 1;
       this.productList = this.productList.concat(await this.fetchProductList());
-    },
-
-    updateCategory(newCategory) {
-      this.category = newCategory;
     },
 
     toggleModalFilterMobile() {

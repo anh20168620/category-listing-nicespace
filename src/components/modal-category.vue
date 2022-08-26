@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-category flex">
+  <div class="modal-category flex" @click="$emit('closeModal')">
     <div class="modal-category-list">
       <div
         class="modal-category-item"
@@ -79,7 +79,7 @@ export default {
   background: #ffffff;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  z-index: 1;
+  z-index: 2;
 }
 
 .modal-category-list {

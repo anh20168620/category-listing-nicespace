@@ -4,10 +4,13 @@
     @toggleModal="toggleModal()"
   ></the-header>
 
-  <router-view
-    :isShowModal="isShowModal"
+  <modal-category
+    v-show="isShowModal"
+    @update-category="updateCategory"
     @closeModal="closeModal()"
-  ></router-view>
+  ></modal-category>
+
+  <router-view @closeModal="closeModal()" :category="category"></router-view>
 
   <the-footer></the-footer>
 
@@ -18,12 +21,19 @@
 import TheHeader from "./components/layouts/the-header.vue";
 import TheFooter from "./components/layouts/the-footer.vue";
 import TheSlogan from "./components/layouts/the-slogan.vue";
+import ModalCategory from "./components/modal-category.vue";
 
 export default {
-  components: { TheHeader, TheFooter, TheSlogan },
+  components: {
+    TheHeader,
+    TheFooter,
+    TheSlogan,
+    ModalCategory,
+  },
   data() {
     return {
       isShowModal: false,
+      category: 7,
     };
   },
   methods: {
@@ -33,6 +43,10 @@ export default {
 
     closeModal() {
       this.isShowModal = false;
+    },
+
+    updateCategory(newCategory) {
+      this.category = newCategory;
     },
   },
 };
